@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>test</title>
+        <script type="application/javascript" src="./jquery-1.8.2.js"></script>
+    </head>
+<body>
+<div>
+    <p>Hello World!</p>
+    <p><input type="button" id="myButton" value="Get details" /> This will not work due to Same Origin Policy (AJAX call)!</p>
+    <div id="result">This should have been replaced. If you see this, it means there was an error!</div>
+</div>
+</body>
+<script>
+    var jsonData;
+</script>
+<script>
+    function foo(mydata) {
+        jsonData = mydata;
+        $("#result").html(mydata.name);
+    }
+</script>
+<script type="application/javascript" src="http://localhost:3000/api/details?jsonp=foo"></script>
+<script>
+    $("#myButton").click(function() {
+        $.getJSON("http://localhost:3000/api/details", function(mydata) {
+                $("#result").html(mydata);
+        });
+    });
+</script>
+</html>
